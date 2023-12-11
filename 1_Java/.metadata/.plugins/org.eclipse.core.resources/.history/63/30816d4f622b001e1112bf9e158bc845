@@ -1,0 +1,131 @@
+package edu.kh.oarr.model.service;
+
+import java.util.Scanner;
+
+import edu.kh.oarr.model.vo.Member;
+
+public class MemberService {
+	
+	private Scanner sc = new Scanner(System.in);
+	
+	
+	// Member 5칸짜리 객체배열 선언 및 할당
+	private Member[] memberArr = new Member[5];
+	
+	
+	public MemberService() { // 기본생성자
+		
+		// memberArr 배열 0,1,2 인덱스 초기화
+		memberArr[0] = new Member("user01", "pass01", "홍길동", 30, "서울");
+		memberArr[1] = new Member("user02", "pass02", "계보린", 25, "경기");
+		memberArr[2] = new Member("user03", "pass03", "고길동", 45, "강원");
+	}
+	
+	
+	
+
+	// 메뉴 출력용 메서드
+	public void displayMenu() {
+		// 반환형 
+		
+		int menuNum = 0; // 메뉴 선택용 변수
+		
+		// 무조건 한번은 반복
+		do {
+			
+			System.out.println("=====회원 정보 관리 프로그램 v2=====");
+			System.out.println("1. 회원 가입");
+			System.out.println("2. 로그인");
+			System.out.println("3. 회원 정보 조회");
+			System.out.println("4. 회원 정보 수정");
+			System.out.println("5. 회원 검색(지역)");
+			System.out.println("0. 프로그램 종료");
+			
+			System.out.print("메뉴 입력 : ");
+			menuNum = sc.nextInt();
+			sc.nextLine(); // 입력 버퍼에 남은 개행문자 제거용
+			
+			switch(menuNum) {
+			
+			case 1 : System.out.println( signUp() ); break;
+			case 2 : System.out.println( login() ); break;
+			case 3 : System.out.println( selectMember() ); break;
+			case 4 : 
+				
+				int result = updateMember();
+				
+				if(result == -1) {
+					System.out.println("로그인 후 이용해주세요.");
+					
+				} else if(result == 0) {
+					System.out.println("회원 정보 수정 실패 (비밀번호 불일치)");
+					
+				} else { // result == 1
+					System.out.println("회원 정보가 수정되었습니다.");
+				}
+				
+				break;
+			case 0 : System.out.println("프로그램 종료.."); break;
+			default : System.out.println("잘못 입력하셨습니다.. 다시 입력해주세요");
+			
+			}
+			
+		} while(menuNum != 0); // menuNum 0 이면 반복 종료
+	}
+	
+	// memberArr의 비어있는 인덱스 번호 반환하는 메서드
+	// 단, 비어있는 인덱스가 없다면 -1 반환
+	public int emptyIndex() {
+		
+		// memberArr 배열을 0 인덱스부터 끝까지 접근해서
+		// 참조하는 값이 null인 경우의 인덱스를 반환
+		for(int i=0; i<memberArr.length; i++) {
+			if(memberArr[i] == null) {
+				return i; // 현재 메서드를 종료하고 호출한곳으로 i 값 가지고 돌아감
+			}
+		}
+		
+		// for문을 수행했지만 return이 되지 않은 경우 해당 위치 코드 수행된다!
+		// -> for문에서 return되지 않았다 == 배열에 빈칸이 없다
+		return -1;
+		
+	}
+
+
+	// 회원가입 메서드
+	public String signUp() {
+		
+		System.out.println("\n=========회원가입==========");
+		
+		// 객체배열 memberArr 에 가입한 회원 정보를 저장할 예정
+		// -> 새로운 회원 정보를 저장할 공간이 있는지 확인하고
+		//    빈 공간의 인덱스 번호를 얻어오기 --> 새로운 메서드 작성
+		int index = emptyIndex(); // memberArr배열에서 비어있는 인덱스 반환받음.
+		
+		
+		
+		return null;
+	}
+
+
+	private int updateMember() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	private char[] selectMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	private char[] login() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}
